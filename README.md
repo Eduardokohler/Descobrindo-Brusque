@@ -4,6 +4,17 @@ Um jogo educativo em formato de quiz interativo para ensinar crianças (6 a 12 a
 
 Projeto desenvolvido em parceria com a UNIFEBE e a Prefeitura Municipal de Brusque – Curso de Sistemas de Informação – 2026.
 
+## 🛠️ Tecnologias Utilizadas
+
+O projeto foi desenvolvido utilizando as seguintes tecnologias:
+
+- HTML5
+- CSS3
+- JavaScript
+- Python
+
+Além disso, o projeto utiliza tecnologias web nativas, permitindo que o jogo seja executado diretamente no navegador, sem necessidade de instalação de dependências ou configuração de servidor.
+
 ## 🚀 Como Rodar o Jogo
 
 O jogo foi desenvolvido com tecnologias web nativas (HTML5, CSS3, JS Vanilla), o que significa que não requer servidor, dependências (Node.js/npm) ou frameworks complexos.
