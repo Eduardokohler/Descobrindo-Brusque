@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descobrindo Brusque</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ResponsiveVoice - voz PT-BR feminina, sem API key necessária -->
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body>
+
+    <main class="game-container">
+
+        <!-- Screen 1: Welcome / Login -->
+        <section id="screen-welcome" class="screen active">
+            <div class="mascot-container bubble-left">
+                <img src="src/assets/images/mascote.png" alt="Mascote Quack" class="mascot floating">
+                <div class="speech-bubble" id="welcome-speech-bubble">OI! EU SOU O QUACK, O MARRECO DE BRUSQUE! DIGITE
+                    SEU NOME AQUI 👇 OU SÓ CLIQUE EM JOGAR!</div>
+            </div>
+            <div class="content-box">
+                <h1 class="game-title">DESCOBRINDO<br><span>BRUSQUE</span></h1>
+                <p class="subtitle">O JOGO DA NOSSA CIDADE!</p>
+                <form id="login-form">
+                    <input type="text" id="player-name" placeholder="SEU NOME (OPCIONAL)" autocomplete="off">
+                    <input type="text" id="player-school" placeholder="SUA ESCOLA (OPCIONAL)" autocomplete="off">
+                    <input type="number" id="player-age" placeholder="SUA IDADE (OPCIONAL)" min="4" max="99">
+                    <button type="submit" class="btn btn-primary btn-large">JOGAR! <span class="icon">🚀</span></button>
+                    <a href="#" id="btn-change-player" class="change-player-link hidden">não é você? trocar jogador</a>
+                </form>
+            </div>
+        </section>
+
+        <!-- Screen 2: Difficulty Selection -->
+        <section id="screen-difficulty" class="screen hidden">
+            <div class="mascot-container bubble-right">
+                <img src="src/assets/images/mascote.png" alt="Mascote Quack" class="mascot floating">
+                <div class="speech-bubble">AGORA ESCOLHA O NÍVEL DE DIFICULDADE! QUANTO MAIS DIFÍCIL, MENOS TEMPO!</div>
+            </div>
+            <div class="content-box">
+                <h2>ESCOLHA O NÍVEL</h2>
+                <div class="difficulty-buttons">
+                    <button class="btn btn-easy" data-level="facil">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">🍃</div>FÁCIL<br><small>30 SEG | COM
+                            DICA</small>
+                    </button>
+                    <button class="btn btn-medium" data-level="medio">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">⏳</div>MÉDIO<br><small>20 SEG</small>
+                    </button>
+                    <button class="btn btn-hard" data-level="dificil">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">🏔️</div>DIFÍCIL<br><small>15 SEG</small>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 3: Game -->
+        <section id="screen-game" class="screen hidden">
+            <div id="player-nameplate" class="nameplate hidden">
+                <div class="nameplate-string"></div>
+                <div class="nameplate-string"></div>
+                <div class="nameplate-board" id="nameplate-text">🎒 Maria — EM João XXIII</div>
+            </div>
+
+            <div class="top-bar">
+                <div class="progress-container">
+                    <div class="progress-text" id="progress-text">PERGUNTA 1 DE 10</div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="timer-container">
+                    <span class="timer-icon"></span> <span id="time-left">30</span>
+                </div>
+                <button id="btn-mute" class="btn-icon" aria-label="Mutar Som">🔔</button>
+            </div>
+
+            <div class="mascot-container bubble-left large-mascot">
+                <img src="src/assets/images/mascote.png" alt="Mascote Quack" class="mascot floating">
+                <div class="speech-bubble" id="game-speech-bubble">LEIA A PERGUNTA E CLIQUE NA RESPOSTA CERTA!</div>
+            </div>
+
+            <div class="content-box question-box">
+                <div class="question-header">
+                    <h2 id="question-text">CARREGANDO PERGUNTA...</h2>
+                    <button id="btn-read-question" class="btn-icon" aria-label="Ouvir Pergunta">🎧</button>
+                </div>
+
+                <div class="alternatives-container" id="alternatives-container">
+                    <!-- Buttons will be injected here via JS -->
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btn-tip" class="btn btn-secondary hidden">💡 USAR DICA</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screen 4: Feedback Modal (Overlay) -->
+        <div id="modal-feedback" class="modal hidden">
+            <div class="modal-content" id="feedback-content">
+                <h2 id="feedback-title">ACERTOU!</h2>
+                <div class="mascot-feedback">
+                    <img src="src/assets/images/mascote.png" alt="Mascote Quack" id="feedback-mascot" class="mascot">
+                </div>
+                <div class="curiosity-box">
+                    <h3>💡 VOCÊ SABIA?</h3>
+                    <p id="feedback-curiosity">Curiosidade vai aqui...</p>
+                </div>
+                <button id="btn-next-question" class="btn btn-primary">PRÓXIMA PERGUNTA ➡️</button>
+            </div>
+        </div>
+
+        <!-- Screen 5: Final Result -->
+        <section id="screen-result" class="screen hidden">
+            <div class="mascot-container bubble-top center-mascot">
+                <img src="src/assets/images/mascote.png" alt="Mascote Quack" class="mascot jumping">
+                <div class="speech-bubble">PARABÉNS! VOCÊ TERMINOU O JOGO!</div>
+            </div>
+            <div class="content-box result-box">
+                <h2>FIM DE JOGO!</h2>
+                <p class="result-player-info" id="result-player-name"></p>
+                <div class="score-display">
+                    VOCÊ ACERTOU<br>
+                    <span id="final-score">8</span> DE <span id="total-questions">10</span>!
+                </div>
+                <div class="trophy" id="trophy-container">
+                    🏆
+                </div>
+                <p id="result-message" class="result-message">VOCÊ É UM EXPERT EM BRUSQUE!</p>
+
+                <div class="result-buttons">
+                    <button id="btn-play-again" class="btn btn-primary btn-large">🔄 JOGAR NOVAMENTE</button>
+                    <button id="btn-share" class="btn btn-secondary">🔗 COMPARTILHAR</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Audio Elements for Sound Effects -->
+    <!-- We will use JS Audio objects for simplicity, or we could add audio tags here. 
+         Let's use JS Audio objects to avoid clutter, except for background music if needed. -->
+
+    <script src="src/js/questions.js"></script>
+    <script src="src/js/game.js"></script>
+</body>
+
+</html>

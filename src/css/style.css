@@ -1,0 +1,529 @@
+/* CSS Variáveis - Identidade Visual Stardew / Pixel Art */
+:root {
+    --color-green: #2E7D32;
+    --color-red: #D32F2F;
+    --color-yellow: #FBC02D;
+    --color-blue: #42A5F5;
+    --color-white: #FFFFFF;
+    --color-purple: #7B1FA2;
+    
+    --color-wood-dark: #3e2723;
+    --color-wood-light: #795548;
+    --color-wood-highlight: #a1887f;
+    --color-parchment: #f4e4c1;
+    --color-parchment-dark: #e8d4a2;
+    
+    --color-correct: #388E3C;
+    --color-wrong: #D32F2F;
+    --color-text: #212121;
+    
+    --font-title: 'Pixelify Sans', cursive, monospace;
+    --font-pixel: 'Pixelify Sans', monospace;
+    --font-body: 'Nunito', sans-serif;
+    
+    --shadow-solid: 4px 4px 0px rgba(0, 0, 0, 0.4);
+    --shadow-solid-light: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-blue);
+    background-image: url('../assets/images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    /* Força pixel art nos assets globais se redimensionados */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 800px;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .game-container {
+        min-height: 85vh;
+        margin: 20px;
+    }
+}
+
+.screen {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    animation: none; /* No ease-in-out animations for main UI */
+}
+
+h1, h2, h3 {
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+}
+
+/* Painel principal (dialog box estilo Stardew) */
+.content-box {
+    background-color: var(--color-parchment);
+    /* Textura dither sutil */
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    /* Moldura de madeira pixel-perfect nineslice feeling */
+    border: 4px solid var(--color-wood-dark);
+    box-shadow: inset 4px 4px 0px var(--color-white), inset -4px -4px 0px rgba(0,0,0,0.1), var(--shadow-solid);
+}
+
+.game-title {
+    font-size: 2.5rem;
+    color: var(--color-purple);
+    text-align: center;
+    line-height: 1.1;
+    margin-bottom: 5px;
+}
+
+.game-title span {
+    color: var(--color-red);
+    font-size: 3.5rem;
+    text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--color-green);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-family: var(--font-pixel);
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 15px;
+    background: var(--color-white);
+    border: 4px solid var(--color-wood-dark);
+    box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
+    font-family: var(--font-pixel);
+    font-size: 1.1rem;
+    outline: none;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+input:focus {
+    border-color: var(--color-blue);
+}
+
+.change-player-link {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    font-family: var(--font-pixel);
+    font-size: 0.9rem;
+    color: var(--color-text);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Botões (Stardew button style) */
+.btn {
+    font-family: var(--font-pixel);
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-white);
+    background-color: var(--color-wood-light);
+    border: 4px solid var(--color-wood-dark);
+    box-shadow: inset 2px 2px 0px rgba(255,255,255,0.3), inset -2px -2px 0px rgba(0,0,0,0.3), var(--shadow-solid);
+}
+
+.btn:active {
+    transform: translateY(4px);
+    box-shadow: inset -2px -2px 0px rgba(255,255,255,0.3), inset 2px 2px 0px rgba(0,0,0,0.3), 0 0px 0px rgba(0,0,0,0);
+}
+
+.btn-large {
+    font-size: 1.5rem;
+    padding: 20px;
+}
+
+.btn-primary { background-color: var(--color-green); }
+.btn-secondary { background-color: var(--color-blue); }
+
+/* Difficulty Buttons (Hanging Signs) */
+.difficulty-buttons {
+    display: flex; gap: 15px; width: 100%;
+}
+@media (max-width: 767px) {
+    .difficulty-buttons { flex-direction: column; }
+}
+
+.difficulty-buttons .btn {
+    position: relative;
+    margin-top: 25px; /* space for strings */
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.difficulty-buttons .btn::before {
+    content: ''; position: absolute;
+    top: -29px; left: 20%;
+    width: 4px; height: 25px;
+    background: repeating-linear-gradient(to bottom, #d7ccc8, #d7ccc8 4px, #a1887f 4px, #a1887f 8px);
+}
+.difficulty-buttons .btn::after {
+    content: ''; position: absolute;
+    top: -29px; right: 20%;
+    width: 4px; height: 25px;
+    background: repeating-linear-gradient(to bottom, #d7ccc8, #d7ccc8 4px, #a1887f 4px, #a1887f 8px);
+}
+
+.btn-easy { background-color: var(--color-green); }
+.btn-medium { background-color: var(--color-yellow); color: var(--color-text); }
+.btn-hard { background-color: var(--color-red); }
+
+/* Balão Quack */
+.mascot-container {
+    display: flex; align-items: flex-end; margin-bottom: 20px; z-index: 10;
+}
+.mascot-container.bubble-left { flex-direction: row; }
+.mascot-container.bubble-right { flex-direction: row-reverse; }
+.mascot-container.bubble-top { flex-direction: column-reverse; align-items: center; }
+
+.mascot { width: 120px; height: 120px; object-fit: contain; }
+.small-mascot .mascot { width: 80px; height: 80px; }
+.large-mascot .mascot { 
+    width: 240px; 
+    height: 240px; 
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+    margin-right: -10px; /* pull bubble closer */
+}
+.center-mascot .mascot { width: 150px; height: 150px; }
+
+/* Mascot styling for welcome and result screens */
+#screen-welcome .mascot {
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+}
+
+#screen-result .mascot {
+    background: radial-gradient(circle, rgba(255,255,255,0.6) 20%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+}
+
+.speech-bubble {
+    background: var(--color-parchment);
+    border: 4px solid var(--color-wood-dark);
+    padding: 15px;
+    font-family: var(--font-pixel);
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow-solid);
+    position: relative;
+    max-width: 250px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-text);
+}
+
+/* Tail in pixel style (squares) */
+.bubble-left .speech-bubble { margin-left: 20px; }
+.bubble-left .speech-bubble::before {
+    content: ''; position: absolute;
+    left: -20px; bottom: 15px;
+    width: 16px; height: 16px;
+    background: var(--color-wood-dark);
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+.bubble-left .speech-bubble::after {
+    content: ''; position: absolute;
+    left: -12px; bottom: 19px;
+    width: 12px; height: 8px;
+    background: var(--color-parchment);
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+}
+
+.bubble-right .speech-bubble { margin-right: 20px; }
+.bubble-right .speech-bubble::before {
+    content: ''; position: absolute;
+    right: -20px; bottom: 15px;
+    width: 16px; height: 16px;
+    background: var(--color-wood-dark);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+.bubble-right .speech-bubble::after {
+    content: ''; position: absolute;
+    right: -12px; bottom: 19px;
+    width: 12px; height: 8px;
+    background: var(--color-parchment);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.bubble-top .speech-bubble { margin-bottom: 20px; }
+.bubble-top .speech-bubble::before {
+    content: ''; position: absolute;
+    bottom: -20px; left: 50%; transform: translateX(-50%);
+    width: 20px; height: 16px;
+    background: var(--color-wood-dark);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.bubble-top .speech-bubble::after {
+    content: ''; position: absolute;
+    bottom: -12px; left: 50%; transform: translateX(-50%);
+    width: 12px; height: 12px;
+    background: var(--color-parchment);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+
+/* HUD */
+.top-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--color-wood-dark);
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 4px solid #212121;
+    box-shadow: inset 2px 2px 0px rgba(255,255,255,0.1), var(--shadow-solid);
+    gap: 15px;
+}
+
+.progress-container { flex: 1; }
+.progress-text {
+    font-family: var(--font-pixel);
+    font-size: 0.9rem; margin-bottom: 5px;
+    text-transform: uppercase; color: var(--color-parchment);
+}
+.progress-bar-bg {
+    background: #212121; height: 16px;
+    border: 2px solid #000;
+}
+.progress-bar-fill {
+    background: var(--color-green);
+    height: 100%; width: 10%;
+    transition: width 0.3s steps(10);
+    box-shadow: inset 0px 4px 0px rgba(255,255,255,0.3);
+}
+
+.timer-container {
+    font-family: var(--font-pixel);
+    font-size: 1.5rem;
+    color: var(--color-yellow);
+    display: flex; align-items: center; gap: 5px;
+}
+.timer-icon::before {
+    content: '⏳';
+    display: inline-block;
+    animation: flipHourglass 1s steps(2) infinite;
+}
+@keyframes flipHourglass {
+    0% { transform: scaleY(1); }
+    100% { transform: scaleY(-1); }
+}
+
+.btn-icon {
+    background: none; border: none; font-size: 1.5rem;
+    cursor: pointer; transition: 0s;
+}
+.btn-icon:hover { transform: translateY(-2px); }
+
+/* Plaquinha de Identificação (Nameplate) */
+.nameplate {
+    position: absolute; top: -10px; right: 30px;
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 50;
+    animation: swing 2s steps(4) infinite;
+    transform-origin: top center;
+}
+.nameplate-string {
+    width: 2px; height: 15px;
+    background: repeating-linear-gradient(to bottom, #d7ccc8, #d7ccc8 2px, #a1887f 2px, #a1887f 4px);
+}
+.nameplate-board {
+    background-color: var(--color-wood-light);
+    border: 2px solid var(--color-wood-dark);
+    padding: 5px 10px;
+    font-family: var(--font-pixel);
+    font-size: 0.8rem; color: var(--color-white);
+    box-shadow: var(--shadow-solid-light);
+    white-space: nowrap;
+}
+@keyframes swing {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(2deg); }
+    75% { transform: rotate(-2deg); }
+}
+
+/* Questões e Alternativas (nineslice simulação via box-shadow insets) */
+.question-header {
+    display: flex; align-items: center; justify-content: space-between;
+    width: 100%; gap: 10px; margin-bottom: 10px;
+}
+.question-header h2 {
+    font-size: 1.3rem; color: var(--color-wood-dark); font-family: var(--font-body); font-weight: 900; text-shadow: none;
+}
+.alternatives-container { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-bottom: 15px; }
+
+.btn-alt {
+    background: var(--color-wood-light);
+    color: var(--color-white);
+    border: 4px solid var(--color-wood-dark);
+    box-shadow: inset 2px 2px 0px rgba(255,255,255,0.2), inset -2px -2px 0px rgba(0,0,0,0.3), var(--shadow-solid-light);
+    font-family: var(--font-body);
+    font-weight: 700; text-align: left; justify-content: flex-start;
+    padding: 12px 15px; transition: 0s;
+}
+.btn-alt strong {
+    font-family: var(--font-pixel);
+    background: var(--color-wood-dark);
+    color: var(--color-white);
+    padding: 2px 6px;
+    margin-right: 10px;
+}
+.btn-alt:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 2px 2px 0px rgba(255,255,255,0.2), inset -2px -2px 0px rgba(0,0,0,0.3), var(--shadow-solid);
+    background: #6D4C41;
+}
+.btn-alt.correct { background: var(--color-correct); border-color: #1B5E20; color: white; }
+.btn-alt.wrong { background: var(--color-wrong); border-color: #B71C1C; color: white; }
+
+.action-buttons { width: 100%; }
+
+/* Modal feedback (Taped Note) */
+.modal {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 100;
+    display: flex; justify-content: center; align-items: center; padding: 20px;
+}
+
+.modal-content {
+    background: var(--color-parchment);
+    padding: 30px; text-align: center; width: 100%; max-width: 500px;
+    border: 2px solid #d7ccc8;
+    box-shadow: var(--shadow-solid);
+    position: relative;
+    animation: stampIn 0.3s steps(4) forwards;
+}
+.modal-content::before {
+    content: ''; position: absolute;
+    top: -15px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+    width: 80px; height: 30px;
+    background: rgba(255,255,255,0.5);
+    border: 2px solid rgba(0,0,0,0.1);
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+
+@keyframes stampIn {
+    0% { transform: scale(2); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+#feedback-title { font-size: 2.5rem; margin-bottom: 15px; text-shadow: 2px 2px 0px rgba(0,0,0,0.2); }
+
+.curiosity-box {
+    background: var(--color-yellow);
+    padding: 15px; margin: 20px 0; text-align: left;
+    border: 4px solid #F57F17;
+    position: relative;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+}
+.curiosity-box::after {
+    content: ''; position: absolute;
+    bottom: -4px; right: -4px;
+    width: 20px; height: 20px;
+    background: #F57F17;
+    border-top: 4px solid #e65100; border-left: 4px solid #e65100;
+}
+.curiosity-box h3 { color: #e65100; margin-bottom: 5px; font-size: 1.2rem; font-family: var(--font-pixel); }
+
+/* Tela final (Pergaminho) */
+.result-box {
+    background: var(--color-parchment-dark);
+    border: 4px solid var(--color-wood-dark);
+    position: relative;
+    padding-top: 40px; padding-bottom: 40px;
+    box-shadow: var(--shadow-solid);
+}
+.result-box::before {
+    content: ''; position: absolute;
+    top: -16px; left: -10px; right: -10px; height: 20px;
+    background: #a1887f; border: 4px solid var(--color-wood-dark);
+}
+.result-box::after {
+    content: ''; position: absolute;
+    bottom: -16px; left: -10px; right: -10px; height: 20px;
+    background: #a1887f; border: 4px solid var(--color-wood-dark);
+}
+
+.score-display { font-family: var(--font-pixel); font-size: 1.5rem; color: var(--color-wood-dark); text-align: center; }
+.score-display span { font-size: 3.5rem; color: var(--color-green); text-shadow: 2px 2px 0 rgba(0,0,0,0.2); }
+.result-message { font-family: var(--font-pixel); color: var(--color-wood-dark); text-align: center; margin-top: 15px; font-size: 1.2rem; }
+
+.trophy {
+    font-size: 5rem; text-align: center;
+    animation: trophyShine 1s steps(2) infinite;
+}
+@keyframes trophyShine {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+.result-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; width: 100%; }
+.result-player-info { text-align: center; font-family: var(--font-pixel); font-size: 1.1rem; color: var(--color-wood-dark); margin-bottom: 10px; }
+
+/* Confetti Container */
+#canvas-confetti { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999; }
+
+/* Animações utilitárias (steps) */
+.floating { animation: floating 2s steps(4) infinite; }
+@keyframes floating {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+    100% { transform: translateY(0px); }
+}
+
+.jumping { animation: floating 1s steps(4) infinite; }
+.shake { animation: shake 0.3s steps(3); }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25%, 75% { transform: translateX(-4px); }
+    50% { transform: translateX(4px); }
+}
+
+@media (min-width: 480px) { .speech-bubble { max-width: 400px; } }
+@media (min-width: 768px) {
+    .mascot { width: 150px; height: 150px; }
+    .game-title { font-size: 3rem; }
+    .game-title span { font-size: 4rem; }
+}
