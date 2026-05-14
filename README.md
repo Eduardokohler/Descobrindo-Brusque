@@ -38,7 +38,7 @@ Para adicionar uma nova pergunta, siga o formato abaixo dentro do nível desejad
 
 O jogo selecionará aleatoriamente 10 perguntas desse arquivo a cada partida.
 
-## 🎨 Como Trocar o Mascote e Cenário
+## 🎨 Como Alterar o Mascote e Cenário
 
 As imagens do jogo estão na pasta `src/assets/images/`.
 Para trocar os personagens ou cenários:
