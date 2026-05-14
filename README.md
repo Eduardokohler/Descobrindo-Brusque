@@ -1,19 +1,16 @@
 # Descobrindo Brusque
 
-Um jogo educativo em formato de quiz interativo para ensinar crianças (6 a 12 anos) sobre a história e cultura da cidade de Brusque – SC. 
+Um jogo educativo em formato de quiz interativo para ensinar crianças (6 a 12 anos) sobre a história e cultura da cidade de Brusque – SC.
 
 Projeto desenvolvido em parceria com a UNIFEBE e a Prefeitura Municipal de Brusque – Curso de Sistemas de Informação – 2026.
 
 ## 🛠️ Tecnologias Utilizadas
 
-O projeto foi desenvolvido utilizando as seguintes tecnologias:
-
-- HTML5
-- CSS3
-- JavaScript
-- Python
-
-Além disso, o projeto utiliza tecnologias web nativas, permitindo que o jogo seja executado diretamente no navegador, sem necessidade de instalação de dependências ou configuração de servidor.
+- HTML5, CSS3, JavaScript (Vanilla)
+- Python (geração de áudios)
+- [edge-tts](https://github.com/rany2/edge-tts) — vozes neurais Microsoft Edge (pt-BR)
+- Web Audio API — efeitos sonoros de acerto/erro
+- GitHub Pages — hospedagem
 
 ## 👥 Integrantes do Projeto
 
@@ -25,43 +22,48 @@ Além disso, o projeto utiliza tecnologias web nativas, permitindo que o jogo se
 
 ## 🚀 Como Rodar o Jogo
 
-O jogo foi desenvolvido com tecnologias web nativas (HTML5, CSS3, JS Vanilla), o que significa que não requer servidor, dependências (Node.js/npm) ou frameworks complexos.
+O jogo usa tecnologias web nativas e não requer instalação de dependências ou servidor.
 
-Para rodar:
-1. Extraia os arquivos.
-2. Dê um duplo-clique no arquivo `index.html` para abri-lo diretamente no seu navegador de internet (Google Chrome, Edge, Firefox, etc).
-3. (Opcional) Para uma melhor experiência de desenvolvimento, você pode abrir com um servidor local simples como a extensão *Live Server* do VSCode.
+1. Clone o repositório ou extraia os arquivos.
+2. Abra o `index.html` no navegador (Chrome, Edge, Firefox).
+3. Para desenvolvimento, use a extensão *Live Server* do VSCode para evitar bloqueios de CORS ao carregar o JSON e os áudios.
+
+> O jogo também está disponível online via GitHub Pages.
 
 ## 📝 Como Adicionar ou Editar Perguntas
 
-O banco de dados de perguntas está localizado em `src/js/questions.js`.
-As perguntas estão estruturadas em um Array de objetos JSON.
+As perguntas ficam em `src/data/perguntas.json`. Basta editar o arquivo seguindo o formato:
 
-Para adicionar uma nova pergunta, siga o formato abaixo dentro do nível desejado (Fácil, Médio, Difícil):
-
-```javascript
+```json
 {
-    id: 16,
-    level: "facil", // ou "medio", "dificil"
-    question: "SUA PERGUNTA EM CAIXA ALTA AQUI",
-    alternatives: [
-        "ALTERNATIVA 1",
-        "ALTERNATIVA 2",
-        "ALTERNATIVA 3",
-        "ALTERNATIVA CORRETA"
-    ],
-    correctAnswer: "ALTERNATIVA CORRETA",
-    curiosity: "Curiosidade educativa para exibir quando o aluno responder."
+  "id": 16,
+  "pergunta": "SUA PERGUNTA AQUI",
+  "respostas": ["OPÇÃO 1", "OPÇÃO 2", "OPÇÃO 3", "OPÇÃO 4"],
+  "resposta_certa": "OPÇÃO 1",
+  "curiosidade": "Curiosidade educativa exibida após a resposta.",
+  "bgImage": "src/assets/images/bg_q1.png"
 }
 ```
 
-O jogo selecionará aleatoriamente 10 perguntas desse arquivo a cada partida.
+O arquivo `src/js/questions.js` carrega o JSON automaticamente e converte para o formato do jogo.
 
-## 🎨 Como Alterar o Mascote e Cenário
+## 🔊 Como Regenerar os Áudios
 
-As imagens do jogo estão na pasta `src/assets/images/`.
-Para trocar os personagens ou cenários:
-1. Substitua a imagem `mascote.png` pela sua nova arte do mascote. Mantenha o fundo transparente (formato PNG).
-2. Substitua a imagem `background.png` pelo seu novo cenário. Recomendamos proporção widescreen (1920x1080).
+Os áudios das perguntas ficam em `src/assets/audio/` e são gerados com a voz neural `pt-BR-AntonioNeural` (masculina).
 
-**Nota**: O projeto baseia-se fortemente na paleta de cores alemã/brusquense e elementos como enxaimel. Você pode alterar as cores principais modificando as variáveis no topo do arquivo `src/css/style.css`.
+Para regenerar após editar as perguntas:
+
+```bash
+pip install edge-tts
+python generate_audio_edge.py
+```
+
+Os arquivos gerados são: `q1.mp3` ... `q15.mp3`, `acertou.mp3`, `errou.mp3`, `timeout.mp3`.
+
+## 🎨 Como Alterar Imagens
+
+As imagens ficam em `src/assets/images/`.
+
+- `mascote.png` — mascote do jogo (PNG com fundo transparente)
+- `background.png` — fundo da tela inicial
+- `bg_q1.png` ... `bg_q15.png` — fundos de cada pergunta
