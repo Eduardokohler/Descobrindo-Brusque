@@ -262,6 +262,7 @@ function handleAnswer(selectedAlt, buttonElement) {
 function handleTimeout() {
     const q = state.questions[state.currentQuestionIndex];
     playWrongSound();
+    if (!state.soundMuted) playAudioFile('src/assets/audio/timeout.mp3');
     const buttons = document.querySelectorAll('.btn-alt');
     buttons.forEach(btn => {
         btn.disabled = true;
@@ -299,9 +300,9 @@ function showFeedback(isCorrect, curiosity) {
     
     document.getElementById('feedback-curiosity').innerText = curiosity;
     
-    if (state.soundMuted === false) {
-        const prefix = isCorrect ? "Muito bem, acertou! " : "Que pena, você errou! ";
-        speakText(prefix + curiosity);
+    if (!state.soundMuted) {
+        const file = isCorrect ? 'src/assets/audio/acertou.mp3' : 'src/assets/audio/errou.mp3';
+        playAudioFile(file);
     }
 }
 
@@ -355,43 +356,57 @@ document.getElementById('btn-share').addEventListener('click', () => {
     alert(`Consegui ${state.score} pontos no jogo Descobrindo Brusque!`);
 });
 
-// Web Speech API
-function speakText(text, onEndCallback) {
+// Áudio: toca mp3 pré-gerado, com fallback para TTS
+let currentAudio = null;
+
+function stopAudio() {
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
     synth.cancel();
+}
+
+function playAudioFile(file, onEndCallback) {
+    stopAudio();
+    const audio = new Audio(file);
+    currentAudio = audio;
+    audio.onended = () => { currentAudio = null; if (onEndCallback) onEndCallback(); };
+    audio.onerror = () => { currentAudio = null; if (onEndCallback) onEndCallback(); };
+    audio.play().catch(() => { if (onEndCallback) onEndCallback(); });
+}
+
+function speakText(text, onEndCallback) {
     if (state.soundMuted) {
         if (onEndCallback) onEndCallback();
         return;
     }
-    
-    currentUtterance = new SpeechSynthesisUtterance(text);
-    currentUtterance.lang = 'pt-BR';
-    currentUtterance.rate = 1.0;
-    currentUtterance.pitch = 1.0; // Voz natural, clara e suave
-    
-    // Tenta encontrar uma voz masculina agradável (ex: Antonio, Thiago, Daniel, Google pt-BR)
-    const voices = synth.getVoices();
-    const ptVoices = voices.filter(v => v.lang.includes('pt-BR') || v.lang.includes('pt-PT'));
-    
-    const maleVoice = ptVoices.find(v => 
-        v.name.includes('Antonio') || 
-        v.name.includes('Thiago') || 
-        v.name.includes('Daniel') || 
-        (v.name.includes('Google') && v.name.includes('Brasil')) // O Google pt-BR às vezes é configurável
-    );
-    
-    if (maleVoice) {
-        currentUtterance.voice = maleVoice;
-    } else if (ptVoices.length > 0) {
-        currentUtterance.voice = ptVoices[0];
+
+    // Mapeia texto para arquivo de áudio pré-gerado
+    const q = state.questions[state.currentQuestionIndex];
+    let audioFile = null;
+
+    if (q && text === q.question) {
+        audioFile = `src/assets/audio/q${q.id}.mp3`;
+    } else if (text.includes('acertou') || text.includes('Muito bem')) {
+        audioFile = 'src/assets/audio/acertou.mp3';
+    } else if (text.includes('errou') || text.includes('pena')) {
+        audioFile = 'src/assets/audio/errou.mp3';
+    } else if (text.includes('tempo')) {
+        audioFile = 'src/assets/audio/timeout.mp3';
     }
-    
-    if (onEndCallback) {
-        currentUtterance.onend = onEndCallback;
-        // Prevenir travamentos: iniciar o timer se der erro no áudio
-        currentUtterance.onerror = onEndCallback;
+
+    if (audioFile) {
+        playAudioFile(audioFile, onEndCallback);
+    } else {
+        // Fallback TTS
+        synth.cancel();
+        currentUtterance = new SpeechSynthesisUtterance(text);
+        currentUtterance.lang = 'pt-BR';
+        currentUtterance.rate = 0.9;
+        if (onEndCallback) {
+            currentUtterance.onend = onEndCallback;
+            currentUtterance.onerror = onEndCallback;
+        }
+        synth.speak(currentUtterance);
     }
-    
-    synth.speak(currentUtterance);
 }
 
 document.getElementById('btn-read-question').addEventListener('click', () => {
