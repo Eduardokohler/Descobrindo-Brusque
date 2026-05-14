@@ -15,6 +15,14 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 Além disso, o projeto utiliza tecnologias web nativas, permitindo que o jogo seja executado diretamente no navegador, sem necessidade de instalação de dependências ou configuração de servidor.
 
+## 👥 Integrantes do Projeto
+
+- Caio Muller Dalprá
+- Eduardo Kohler
+- Felipe de Almeida Waldrigues
+- Lucas Baptista
+- Vinicius Imhof Waldrigues
+
 ## 🚀 Como Rodar o Jogo
 
 O jogo foi desenvolvido com tecnologias web nativas (HTML5, CSS3, JS Vanilla), o que significa que não requer servidor, dependências (Node.js/npm) ou frameworks complexos.
