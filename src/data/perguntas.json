@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "pergunta": "QUAL ANIMAL DÁ NOME À FESTA FENARRECO?",
+    "respostas": ["MARRECO", "LEÃO", "CACHORRO", "PEIXE"],
+    "resposta_certa": "MARRECO",
+    "curiosidade": "O marreco é tão importante para Brusque que tem uma festa só dele — a Fenarreco!",
+    "bgImage": "src/assets/images/bg_q3.png"
+  },
+  {
+    "id": 2,
+    "pergunta": "QUAL ROUPA É USADA PARA DANÇAR NA FENARRECO?",
+    "respostas": ["TRAJE TÍPICO ALEMÃO", "PIJAMA", "ROUPA DE PRAIA", "FANTASIA DE SUPER-HERÓI"],
+    "resposta_certa": "TRAJE TÍPICO ALEMÃO",
+    "curiosidade": "Os trajes típicos alemães, como o dirndl e o lederhosen, são usados nas danças folclóricas da Fenarreco.",
+    "bgImage": "src/assets/images/bg_q5.png"
+  },
+  {
+    "id": 3,
+    "pergunta": "QUAL COMIDA É TRADICIONAL NA FENARRECO?",
+    "respostas": ["MARRECO COM REPOLHO ROXO", "SUSHI", "PIZZA", "ACARAJÉ"],
+    "resposta_certa": "MARRECO COM REPOLHO ROXO",
+    "curiosidade": "O marreco recheado é servido com chucrute, batatas e o famoso repolho roxo, herança da culinária alemã.",
+    "bgImage": "src/assets/images/bg_q7.png"
+  },
+  {
+    "id": 4,
+    "pergunta": "QUAIS SÃO AS CORES DA BANDEIRA DE BRUSQUE?",
+    "respostas": ["AMARELO E VERMELHO", "AZUL E VERDE", "PRETO E BRANCO", "ROXO E LARANJA"],
+    "resposta_certa": "AMARELO E VERMELHO",
+    "curiosidade": "As cores amarelo e vermelho da bandeira de Brusque representam a história e a cultura da cidade.",
+    "bgImage": "src/assets/images/bg_q1.png"
+  },
+  {
+    "id": 5,
+    "pergunta": "COMO SE CHAMA O RIO QUE PASSA POR BRUSQUE?",
+    "respostas": ["ITAJAÍ-MIRIM", "AMAZONAS", "SÃO FRANCISCO", "PARANÁ"],
+    "resposta_certa": "ITAJAÍ-MIRIM",
+    "curiosidade": "O Rio Itajaí-Mirim corta toda a cidade e é parte fundamental da história de Brusque.",
+    "bgImage": "src/assets/images/bg_q4.png"
+  },
+  {
+    "id": 6,
+    "pergunta": "COMO SE CHAMA A CIDADE ONDE MORAMOS?",
+    "respostas": ["BRUSQUE", "BLUMENAU", "ITAJAÍ", "JOINVILLE"],
+    "resposta_certa": "BRUSQUE",
+    "curiosidade": "Brusque foi fundada em 4 de agosto de 1860 e fica no Vale do Itajaí, em Santa Catarina.",
+    "bgImage": "src/assets/images/bg_q1.png"
+  },
+  {
+    "id": 7,
+    "pergunta": "QUEM VEIO MORAR EM BRUSQUE HÁ MUITO TEMPO?",
+    "respostas": ["ALEMÃES", "PIRATAS", "DINOSSAUROS", "ASTRONAUTAS"],
+    "resposta_certa": "ALEMÃES",
+    "curiosidade": "Os primeiros colonos alemães chegaram em 1860, liderados pelo Barão Maximiliano von Schneeburg.",
+    "bgImage": "src/assets/images/bg_q6.png"
+  },
+  {
+    "id": 8,
+    "pergunta": "DE ONDE VIERAM ESSAS PESSOAS?",
+    "respostas": ["ALEMANHA", "LUA", "DESERTO", "JAPÃO"],
+    "resposta_certa": "ALEMANHA",
+    "curiosidade": "Os imigrantes vieram principalmente da Alemanha e trouxeram sua cultura, língua e tradições para Brusque.",
+    "bgImage": "src/assets/images/bg_q6.png"
+  },
+  {
+    "id": 9,
+    "pergunta": "O QUE ESSAS PESSOAS TROUXERAM PARA BRUSQUE?",
+    "respostas": ["COSTUMES E COMIDAS", "ROBÔS", "AVIÕES", "SUBMARINOS"],
+    "resposta_certa": "COSTUMES E COMIDAS",
+    "curiosidade": "Os imigrantes trouxeram festas, danças, receitas e a arquitetura enxaimel que ainda vemos em Brusque.",
+    "bgImage": "src/assets/images/bg_q8.png"
+  },
+  {
+    "id": 10,
+    "pergunta": "COMO ERAM AS PRIMEIRAS CASAS DE BRUSQUE?",
+    "respostas": ["DE MADEIRA", "DE GELO", "DE METAL", "DE PLÁSTICO"],
+    "resposta_certa": "DE MADEIRA",
+    "curiosidade": "As primeiras casas eram de madeira no estilo enxaimel, técnica trazida pelos imigrantes alemães.",
+    "bgImage": "src/assets/images/bg_q8.png"
+  },
+  {
+    "id": 11,
+    "pergunta": "POR QUE BRUSQUE É CONHECIDA COMO CIDADE DOS TECIDOS?",
+    "respostas": ["PORQUE FAZ MUITAS ROUPAS", "PORQUE FAZ CARROS", "PORQUE FAZ BARCOS", "PORQUE FAZ AVIÕES"],
+    "resposta_certa": "PORQUE FAZ MUITAS ROUPAS",
+    "curiosidade": "Brusque é chamada de 'Berço da Fiação Catarinense' e 'Cidade da Moda' por sua forte indústria têxtil.",
+    "bgImage": "src/assets/images/bg_q2.png"
+  },
+  {
+    "id": 12,
+    "pergunta": "QUEM FAZ AS ROUPAS NAS FÁBRICAS DE TECIDO?",
+    "respostas": ["COSTUREIRA", "PILOTO", "MÉDICO", "BOMBEIRO"],
+    "resposta_certa": "COSTUREIRA",
+    "curiosidade": "As costureiras e tecelões são profissionais muito importantes para a indústria têxtil de Brusque.",
+    "bgImage": "src/assets/images/bg_q2.png"
+  },
+  {
+    "id": 13,
+    "pergunta": "ONDE PODEMOS VER ANIMAIS EM BRUSQUE?",
+    "respostas": ["ZOO-BOTÂNICO", "CINEMA", "MERCADO", "BIBLIOTECA"],
+    "resposta_certa": "ZOO-BOTÂNICO",
+    "curiosidade": "O Zoobotânico de Brusque abriga animais nativos da Mata Atlântica e plantas raras.",
+    "bgImage": "src/assets/images/bg_q15.png"
+  },
+  {
+    "id": 14,
+    "pergunta": "ONDE FICA O AVIÃO HISTÓRICO DE BRUSQUE?",
+    "respostas": ["PARQUE LEOPOLDO MORITZ", "RODOVIÁRIA", "ESCOLA", "SHOPPING"],
+    "resposta_certa": "PARQUE LEOPOLDO MORITZ",
+    "curiosidade": "O avião é um Douglas DC-3 instalado no Parque Leopoldo Moritz e tornou-se símbolo turístico da cidade.",
+    "bgImage": "src/assets/images/bg_q13.png"
+  },
+  {
+    "id": 15,
+    "pergunta": "QUAL ANIMAL FAZ O SOM \"QUACK QUACK\" E REPRESENTA A FENARRECO?",
+    "respostas": ["MARRECO", "GALINHA", "PORCO", "VACA"],
+    "resposta_certa": "MARRECO",
+    "curiosidade": "O marreco é o mascote da Fenarreco e o símbolo mais querido de Brusque!",
+    "bgImage": "src/assets/images/bg_q3.png"
+  }
+]

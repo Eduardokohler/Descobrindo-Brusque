@@ -444,7 +444,9 @@ function createConfetti() {
 }
 
 // Resgatar do LocalStorage ao abrir
-window.onload = () => {
+window.onload = async () => {
+    await loadQuestions();
+
     const savedData = localStorage.getItem('descobrindoBrusque.player');
     if (savedData) {
         try {
