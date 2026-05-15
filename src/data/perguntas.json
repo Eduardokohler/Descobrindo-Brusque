@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "nivel": "facil",
     "pergunta": "QUAL ANIMAL DÁ NOME À FESTA FENARRECO?",
     "respostas": ["MARRECO", "LEÃO", "CACHORRO", "PEIXE"],
     "resposta_certa": "MARRECO",
@@ -9,6 +10,7 @@
   },
   {
     "id": 2,
+    "nivel": "facil",
     "pergunta": "QUAL ROUPA É USADA PARA DANÇAR NA FENARRECO?",
     "respostas": ["TRAJE TÍPICO ALEMÃO", "PIJAMA", "ROUPA DE PRAIA", "FANTASIA DE SUPER-HERÓI"],
     "resposta_certa": "TRAJE TÍPICO ALEMÃO",
@@ -17,6 +19,7 @@
   },
   {
     "id": 3,
+    "nivel": "facil",
     "pergunta": "QUAL COMIDA É TRADICIONAL NA FENARRECO?",
     "respostas": ["MARRECO COM REPOLHO ROXO", "SUSHI", "PIZZA", "ACARAJÉ"],
     "resposta_certa": "MARRECO COM REPOLHO ROXO",
@@ -25,6 +28,7 @@
   },
   {
     "id": 4,
+    "nivel": "facil",
     "pergunta": "QUAIS SÃO AS CORES DA BANDEIRA DE BRUSQUE?",
     "respostas": ["AMARELO E VERMELHO", "AZUL E VERDE", "PRETO E BRANCO", "ROXO E LARANJA"],
     "resposta_certa": "AMARELO E VERMELHO",
@@ -33,6 +37,7 @@
   },
   {
     "id": 5,
+    "nivel": "facil",
     "pergunta": "COMO SE CHAMA O RIO QUE PASSA POR BRUSQUE?",
     "respostas": ["ITAJAÍ-MIRIM", "AMAZONAS", "SÃO FRANCISCO", "PARANÁ"],
     "resposta_certa": "ITAJAÍ-MIRIM",
@@ -41,6 +46,7 @@
   },
   {
     "id": 6,
+    "nivel": "medio",
     "pergunta": "COMO SE CHAMA A CIDADE ONDE MORAMOS?",
     "respostas": ["BRUSQUE", "BLUMENAU", "ITAJAÍ", "JOINVILLE"],
     "resposta_certa": "BRUSQUE",
@@ -49,6 +55,7 @@
   },
   {
     "id": 7,
+    "nivel": "medio",
     "pergunta": "QUEM VEIO MORAR EM BRUSQUE HÁ MUITO TEMPO?",
     "respostas": ["ALEMÃES", "PIRATAS", "DINOSSAUROS", "ASTRONAUTAS"],
     "resposta_certa": "ALEMÃES",
@@ -57,6 +64,7 @@
   },
   {
     "id": 8,
+    "nivel": "medio",
     "pergunta": "DE ONDE VIERAM ESSAS PESSOAS?",
     "respostas": ["ALEMANHA", "LUA", "DESERTO", "JAPÃO"],
     "resposta_certa": "ALEMANHA",
@@ -65,6 +73,7 @@
   },
   {
     "id": 9,
+    "nivel": "medio",
     "pergunta": "O QUE ESSAS PESSOAS TROUXERAM PARA BRUSQUE?",
     "respostas": ["COSTUMES E COMIDAS", "ROBÔS", "AVIÕES", "SUBMARINOS"],
     "resposta_certa": "COSTUMES E COMIDAS",
@@ -73,6 +82,7 @@
   },
   {
     "id": 10,
+    "nivel": "medio",
     "pergunta": "COMO ERAM AS PRIMEIRAS CASAS DE BRUSQUE?",
     "respostas": ["DE MADEIRA", "DE GELO", "DE METAL", "DE PLÁSTICO"],
     "resposta_certa": "DE MADEIRA",
@@ -81,6 +91,7 @@
   },
   {
     "id": 11,
+    "nivel": "dificil",
     "pergunta": "POR QUE BRUSQUE É CONHECIDA COMO CIDADE DOS TECIDOS?",
     "respostas": ["PORQUE FAZ MUITAS ROUPAS", "PORQUE FAZ CARROS", "PORQUE FAZ BARCOS", "PORQUE FAZ AVIÕES"],
     "resposta_certa": "PORQUE FAZ MUITAS ROUPAS",
@@ -89,6 +100,7 @@
   },
   {
     "id": 12,
+    "nivel": "dificil",
     "pergunta": "QUEM FAZ AS ROUPAS NAS FÁBRICAS DE TECIDO?",
     "respostas": ["COSTUREIRA", "PILOTO", "MÉDICO", "BOMBEIRO"],
     "resposta_certa": "COSTUREIRA",
@@ -97,6 +109,7 @@
   },
   {
     "id": 13,
+    "nivel": "dificil",
     "pergunta": "ONDE PODEMOS VER ANIMAIS EM BRUSQUE?",
     "respostas": ["ZOO-BOTÂNICO", "CINEMA", "MERCADO", "BIBLIOTECA"],
     "resposta_certa": "ZOO-BOTÂNICO",
@@ -105,6 +118,7 @@
   },
   {
     "id": 14,
+    "nivel": "dificil",
     "pergunta": "ONDE FICA O AVIÃO HISTÓRICO DE BRUSQUE?",
     "respostas": ["PARQUE LEOPOLDO MORITZ", "RODOVIÁRIA", "ESCOLA", "SHOPPING"],
     "resposta_certa": "PARQUE LEOPOLDO MORITZ",
@@ -113,6 +127,7 @@
   },
   {
     "id": 15,
+    "nivel": "dificil",
     "pergunta": "QUAL ANIMAL FAZ O SOM \"QUACK QUACK\" E REPRESENTA A FENARRECO?",
     "respostas": ["MARRECO", "GALINHA", "PORCO", "VACA"],
     "resposta_certa": "MARRECO",

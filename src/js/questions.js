@@ -7,6 +7,7 @@ async function loadQuestions() {
 
     questionBank = data.map(q => ({
         id: q.id,
+        nivel: q.nivel,
         question: q.pergunta,
         alternatives: q.respostas,
         correctAnswer: q.resposta_certa,
