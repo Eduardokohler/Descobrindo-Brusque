@@ -28,7 +28,7 @@ AUDIOS = {
 
 async def generate(key, text):
     path = os.path.join(OUTPUT_DIR, f"{key}.mp3")
-    tts = edge_tts.Communicate(text, VOICE, rate="-20%", pitch="-5Hz")
+    tts = edge_tts.Communicate(text, VOICE, pitch="-5Hz")
     await tts.save(path)
 
 
