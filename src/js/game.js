@@ -75,6 +75,17 @@ function shuffleArray(array) {
     return arr;
 }
 
+function selectQuestionsByLevel(level) {
+    const questionsByLevel = questionBank.filter(q => q.nivel === level);
+    const shuffledQuestions = shuffleArray(questionsByLevel);
+
+    if (shuffledQuestions.length < 5) {
+        console.warn(`O nível "${level}" possui menos de 5 perguntas cadastradas.`);
+    }
+
+    return shuffledQuestions.slice(0, 5);
+}
+
 // Navegação de Telas
 function showScreen(screenId) {
     Object.values(screens).forEach(screen => {
@@ -140,9 +151,8 @@ function startGame(level) {
         state.hasTip = false;
     }
 
-    // Sortear 10 perguntas do banco
-    const shuffledBank = shuffleArray(questionBank);
-    state.questions = shuffledBank.slice(0, 10);
+    // Selecionar 5 perguntas únicas do nível escolhido
+    state.questions = selectQuestionsByLevel(level);
     
     const nameplate = document.getElementById('player-nameplate');
     const nameplateText = document.getElementById('nameplate-text');
@@ -171,8 +181,10 @@ function loadQuestion() {
         document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('${q.bgImage}')`;
     }
     
-    document.getElementById('progress-text').innerText = `PERGUNTA ${state.currentQuestionIndex + 1} DE 10`;
-    document.getElementById('progress-bar-fill').style.width = `${((state.currentQuestionIndex + 1) / 10) * 100}%`;
+    const totalQuestions = state.questions.length;
+
+    document.getElementById('progress-text').innerText = `PERGUNTA ${state.currentQuestionIndex + 1} DE ${totalQuestions}`;
+    document.getElementById('progress-bar-fill').style.width = `${((state.currentQuestionIndex + 1) / totalQuestions) * 100}%`;
     
     document.getElementById('question-text').innerText = q.question;
     
@@ -312,22 +324,27 @@ document.getElementById('btn-next-question').addEventListener('click', () => {
     synth.cancel();
     
     state.currentQuestionIndex++;
-    if (state.currentQuestionIndex < 10) {
-        loadQuestion();
+    if (state.currentQuestionIndex < state.questions.length) {
+    loadQuestion();
     } else {
-        endGame();
-    }
+    endGame();
+    }   
 });
 
 function endGame() {
     showScreen('result');
     document.getElementById('result-player-name').innerText = `${state.player.name}, SEU RESULTADO:`;
     document.getElementById('final-score').innerText = state.score;
+
+    const totalQuestions = state.questions.length;
+    document.getElementById('total-questions').innerText = totalQuestions;
     
+    const percentage = totalQuestions > 0 ? (state.score / totalQuestions) * 100 : 0;
+
     let msg = "";
-    if (state.score === 10) msg = "PERFEITO! VOCÊ É UM EXPERT EM BRUSQUE!";
-    else if (state.score >= 7) msg = "MUITO BEM! VOCÊ CONHECE MUITO DA NOSSA CIDADE!";
-    else if (state.score >= 4) msg = "BOM ESFORÇO! MAS PODEMOS APRENDER MAIS!";
+    if (percentage === 100) msg = "PERFEITO! VOCÊ É UM EXPERT EM BRUSQUE!";
+    else if (percentage >= 70) msg = "MUITO BEM! VOCÊ CONHECE MUITO DA NOSSA CIDADE!";
+    else if (percentage >= 40) msg = "BOM ESFORÇO! MAS PODEMOS APRENDER MAIS!";
     else msg = "NÃO DESANIME! JOGUE NOVAMENTE E APRENDA TUDO SOBRE BRUSQUE!";
     
     const resultMessage = document.getElementById('result-message');
@@ -342,8 +359,8 @@ function endGame() {
         document.getElementById('result-player-name').innerText = `SEU RESULTADO:`;
     }
     
-    if (state.score >= 7) {
-        createConfetti();
+    if (percentage >= 70) {
+    createConfetti();
     }
 }
 
