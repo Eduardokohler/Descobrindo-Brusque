@@ -68,6 +68,11 @@ const btnMute = document.getElementById('btn-mute');
 const btnBackToStart = document.getElementById('btn-back-to-start');
 const btnBackToMap = document.getElementById('btn-back-to-map');
 const btnResultBackToStart = document.getElementById('btn-result-back-to-start');
+const audioUnlockOverlay = document.getElementById('audio-unlock-overlay');
+const btnStartBig = document.querySelector('.btn-start-big');
+const btnToggleReview = document.getElementById('btn-toggle-review');
+const finalReviewPanel = document.getElementById('final-review-panel');
+const finalReviewList = document.getElementById('final-review-list');
 
 // Algoritmo Fisher-Yates para embaralhar
 function shuffleArray(array) {
@@ -142,6 +147,7 @@ function startGame(level) {
     state.level = level;
     state.score = 0;
     state.currentQuestionIndex = 0;
+    state.answerHistory = [];
     
     // Configurações por nível
     if (level === 'facil') {
@@ -249,6 +255,12 @@ function handleAnswer(selectedAlt, buttonElement) {
     clearInterval(state.timerInterval);
     const q = state.questions[state.currentQuestionIndex];
     const isCorrect = selectedAlt === q.correctAnswer;
+    state.answerHistory.push({
+        question: q.question,
+        selectedAnswer: selectedAlt,
+        correctAnswer: q.correctAnswer,
+        isCorrect
+    });
     
     const buttons = document.querySelectorAll('.btn-alt');
     buttons.forEach(btn => btn.disabled = true);
@@ -277,6 +289,12 @@ function handleAnswer(selectedAlt, buttonElement) {
 
 function handleTimeout() {
     const q = state.questions[state.currentQuestionIndex];
+    state.answerHistory.push({
+        question: q.question,
+        selectedAnswer: 'TEMPO ESGOTADO',
+        correctAnswer: q.correctAnswer,
+        isCorrect: false
+    });
     playWrongSound();
     if (!state.soundMuted) playAudioFile('src/assets/audio/timeout.mp3');
     const buttons = document.querySelectorAll('.btn-alt');
@@ -366,6 +384,7 @@ function endGame() {
     if (percentage >= 70) {
     createConfetti();
     }
+    renderFinalReview();
 }
 
 document.getElementById('btn-play-again').addEventListener('click', () => {
@@ -402,6 +421,10 @@ btnResultBackToStart.addEventListener('click', () => {
     modalFeedback.classList.add('hidden');
     synth.cancel();
     showScreen('welcome');
+});
+
+btnToggleReview.addEventListener('click', () => {
+    finalReviewPanel.classList.toggle('hidden');
 });
 
 // Áudio: toca mp3 pré-gerado, com fallback para TTS
@@ -506,6 +529,21 @@ function createConfetti() {
     }, 3000);
 }
 
+function renderFinalReview() {
+    if (!finalReviewList) return;
+    finalReviewList.innerHTML = '';
+    state.answerHistory.forEach((item, index) => {
+        const row = document.createElement('div');
+        row.className = `review-item ${item.isCorrect ? 'correct' : 'wrong'}`;
+        row.innerHTML = `
+            <strong>${index + 1}. ${item.question}</strong><br>
+            <span>Sua resposta: ${item.selectedAnswer}</span><br>
+            <span>Correta: ${item.correctAnswer}</span>
+        `;
+        finalReviewList.appendChild(row);
+    });
+}
+
 // Resgatar do LocalStorage ao abrir
 window.onload = async () => {
     await loadQuestions();
@@ -528,6 +566,19 @@ window.onload = async () => {
         } catch (e) {}
     }
 };
+
+function unlockAudioAndStart() {
+    if (!audioUnlockOverlay) return;
+    audioCtx.resume().catch(() => {});
+    audioUnlockOverlay.classList.add('hidden');
+}
+
+if (btnStartBig) {
+    btnStartBig.addEventListener('click', (e) => {
+        e.preventDefault();
+        unlockAudioAndStart();
+    });
+}
 
 document.getElementById('btn-change-player').addEventListener('click', (e) => {
     e.preventDefault();
