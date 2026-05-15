@@ -98,13 +98,10 @@ function showScreen(screenId) {
     });
     screens[screenId].classList.remove('hidden');
     screens[screenId].classList.add('active');
-
+    
+    // Restaura o fundo padrão fora do jogo
     if (screenId !== 'game') {
         document.body.style.backgroundImage = "url('src/assets/images/background.png')";
-    }
-
-    if (screenId === 'difficulty' && !state.soundMuted) {
-        playAudioFile('src/assets/audio/difficulty.mp3');
     }
 }
 
@@ -144,10 +141,7 @@ difficultyButtons.forEach(btn => {
 function startGame(level) {
     state.level = level;
     state.score = 0;
-    state.answerHistory = [];
     state.currentQuestionIndex = 0;
-    document.getElementById('final-review-panel').classList.add('hidden');
-    document.getElementById('btn-toggle-review').innerText = 'VER REVISÃO DAS PERGUNTAS';
     
     // Configurações por nível
     if (level === 'facil') {
@@ -178,7 +172,6 @@ function startGame(level) {
         nameplate.classList.add('hidden');
     }
     
-    screenHistory.push('difficulty');
     showScreen('game');
     loadQuestion();
 }
@@ -261,26 +254,12 @@ function handleAnswer(selectedAlt, buttonElement) {
     buttons.forEach(btn => btn.disabled = true);
     
     if (isCorrect) {
-        state.answerHistory.push({
-            question: q.question,
-            selectedAnswer: selectedAlt,
-            correctAnswer: q.correctAnswer,
-            curiosity: q.curiosity,
-            isCorrect: true
-        });
         buttonElement.classList.add('correct');
         state.score++;
         playCorrectSound();
         createConfetti();
         showFeedback(true, q.curiosity);
     } else {
-        state.answerHistory.push({
-            question: q.question,
-            selectedAnswer: selectedAlt,
-            correctAnswer: q.correctAnswer,
-            curiosity: q.curiosity,
-            isCorrect: false
-        });
         buttonElement.classList.add('wrong');
         screens.game.classList.add('shake');
         setTimeout(() => screens.game.classList.remove('shake'), 500);
@@ -298,13 +277,6 @@ function handleAnswer(selectedAlt, buttonElement) {
 
 function handleTimeout() {
     const q = state.questions[state.currentQuestionIndex];
-    state.answerHistory.push({
-        question: q.question,
-        selectedAnswer: 'TEMPO ESGOTADO',
-        correctAnswer: q.correctAnswer,
-        curiosity: q.curiosity,
-        isCorrect: false
-    });
     playWrongSound();
     if (!state.soundMuted) playAudioFile('src/assets/audio/timeout.mp3');
     const buttons = document.querySelectorAll('.btn-alt');
@@ -383,7 +355,7 @@ function endGame() {
     if (state.player.name && state.player.name !== 'JOGADOR') {
         let customText = `${state.player.name.toUpperCase()}`;
         if (state.player.school) customText += `, DA ${state.player.school.toUpperCase()},`;
-        customText += ` É AGORA UMA EXPERT EM BRUSQUE!`;
+        customText += ` É AGORA UMA ESPECIALISTA EM BRUSQUE!`;
         resultMessage.innerText = customText;
         document.getElementById('result-player-name').innerText = `SEU RESULTADO:`;
     } else {
@@ -394,27 +366,6 @@ function endGame() {
     if (percentage >= 70) {
     createConfetti();
     }
-
-    renderFinalReview();
-}
-
-function renderFinalReview() {
-    const reviewContainer = document.getElementById('final-review-list');
-    if (!reviewContainer) return;
-
-    reviewContainer.innerHTML = '';
-
-    state.answerHistory.forEach((item, index) => {
-        const card = document.createElement('article');
-        card.className = `review-card ${item.isCorrect ? 'review-correct' : 'review-wrong'}`;
-        card.innerHTML = `
-            <h3>${index + 1}. ${item.question}</h3>
-            <p><strong>SUA RESPOSTA:</strong> ${item.selectedAnswer}</p>
-            <p><strong>RESPOSTA CERTA:</strong> ${item.correctAnswer}</p>
-            <p><strong>CURIOSIDADE:</strong> ${item.curiosity}</p>
-        `;
-        reviewContainer.appendChild(card);
-    });
 }
 
 document.getElementById('btn-play-again').addEventListener('click', () => {
@@ -427,12 +378,6 @@ document.getElementById('btn-play-again').addEventListener('click', () => {
 
 document.getElementById('btn-share').addEventListener('click', () => {
     alert(`Consegui ${state.score} pontos no jogo Descobrindo Brusque!`);
-});
-
-document.getElementById('btn-toggle-review').addEventListener('click', (e) => {
-    const panel = document.getElementById('final-review-panel');
-    const isHidden = panel.classList.toggle('hidden');
-    e.currentTarget.innerText = isHidden ? 'VER REVISÃO DAS PERGUNTAS' : 'OCULTAR REVISÃO';
 });
 
 btnBackToMap.addEventListener('click', () => {
@@ -582,13 +527,6 @@ window.onload = async () => {
             }
         } catch (e) {}
     }
-
-    // Overlay de desbloqueio de áudio — garante interação antes de qualquer som
-    const overlay = document.getElementById('audio-unlock-overlay');
-    overlay.querySelector('.btn-start-big').addEventListener('click', () => {
-        overlay.classList.add('hidden');
-        if (!state.soundMuted) playAudioFile('src/assets/audio/welcome.mp3');
-    }, { once: true });
 };
 
 document.getElementById('btn-change-player').addEventListener('click', (e) => {
