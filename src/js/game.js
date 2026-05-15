@@ -64,6 +64,9 @@ const modalFeedback = document.getElementById('modal-feedback');
 const loginForm = document.getElementById('login-form');
 const difficultyButtons = document.querySelectorAll('.difficulty-buttons .btn');
 const btnMute = document.getElementById('btn-mute');
+const btnBackToStart = document.getElementById('btn-back-to-start');
+const btnBackToMap = document.getElementById('btn-back-to-map');
+const btnResultBackToStart = document.getElementById('btn-result-back-to-start');
 
 // Algoritmo Fisher-Yates para embaralhar
 function shuffleArray(array) {
@@ -370,11 +373,38 @@ function endGame() {
 
 document.getElementById('btn-play-again').addEventListener('click', () => {
     playClickSound();
-    showScreen('welcome');
+    clearInterval(state.timerInterval);
+    modalFeedback.classList.add('hidden');
+    synth.cancel();
+    showScreen('difficulty');
 });
 
 document.getElementById('btn-share').addEventListener('click', () => {
     alert(`Consegui ${state.score} pontos no jogo Descobrindo Brusque!`);
+});
+
+btnBackToMap.addEventListener('click', () => {
+    playClickSound();
+    clearInterval(state.timerInterval);
+    modalFeedback.classList.add('hidden');
+    synth.cancel();
+    showScreen('difficulty');
+});
+
+btnBackToStart.addEventListener('click', () => {
+    playClickSound();
+    clearInterval(state.timerInterval);
+    modalFeedback.classList.add('hidden');
+    synth.cancel();
+    showScreen('welcome');
+});
+
+btnResultBackToStart.addEventListener('click', () => {
+    playClickSound();
+    clearInterval(state.timerInterval);
+    modalFeedback.classList.add('hidden');
+    synth.cancel();
+    showScreen('welcome');
 });
 
 // Áudio: toca mp3 pré-gerado, com fallback para TTS
