@@ -17,7 +17,7 @@ Projeto desenvolvido em parceria com a UNIFEBE e a Prefeitura Municipal de Brusq
 - Caio Muller Dalprá
 - Eduardo Kohler
 - Felipe de Almeida Waldrigues
-- Lucas Baptista
+- Lucas Schwarz Baptista
 - Vinicius Imhof Waldrigues
 
 ## 🚀 Como Rodar o Jogo
