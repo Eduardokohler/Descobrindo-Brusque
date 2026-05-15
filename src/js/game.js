@@ -12,6 +12,7 @@ const state = {
     questions: [],
     currentQuestionIndex: 0,
     score: 0,
+    answerHistory: [],
     timerInterval: null,
     timeLeft: 0,
     soundMuted: false
@@ -140,7 +141,10 @@ difficultyButtons.forEach(btn => {
 function startGame(level) {
     state.level = level;
     state.score = 0;
+    state.answerHistory = [];
     state.currentQuestionIndex = 0;
+    document.getElementById('final-review-panel').classList.add('hidden');
+    document.getElementById('btn-toggle-review').innerText = 'VER REVISÃO DAS PERGUNTAS';
     
     // Configurações por nível
     if (level === 'facil') {
@@ -253,12 +257,26 @@ function handleAnswer(selectedAlt, buttonElement) {
     buttons.forEach(btn => btn.disabled = true);
     
     if (isCorrect) {
+        state.answerHistory.push({
+            question: q.question,
+            selectedAnswer: selectedAlt,
+            correctAnswer: q.correctAnswer,
+            curiosity: q.curiosity,
+            isCorrect: true
+        });
         buttonElement.classList.add('correct');
         state.score++;
         playCorrectSound();
         createConfetti();
         showFeedback(true, q.curiosity);
     } else {
+        state.answerHistory.push({
+            question: q.question,
+            selectedAnswer: selectedAlt,
+            correctAnswer: q.correctAnswer,
+            curiosity: q.curiosity,
+            isCorrect: false
+        });
         buttonElement.classList.add('wrong');
         screens.game.classList.add('shake');
         setTimeout(() => screens.game.classList.remove('shake'), 500);
@@ -276,6 +294,13 @@ function handleAnswer(selectedAlt, buttonElement) {
 
 function handleTimeout() {
     const q = state.questions[state.currentQuestionIndex];
+    state.answerHistory.push({
+        question: q.question,
+        selectedAnswer: 'TEMPO ESGOTADO',
+        correctAnswer: q.correctAnswer,
+        curiosity: q.curiosity,
+        isCorrect: false
+    });
     playWrongSound();
     if (!state.soundMuted) playAudioFile('src/assets/audio/timeout.mp3');
     const buttons = document.querySelectorAll('.btn-alt');
@@ -365,6 +390,27 @@ function endGame() {
     if (percentage >= 70) {
     createConfetti();
     }
+
+    renderFinalReview();
+}
+
+function renderFinalReview() {
+    const reviewContainer = document.getElementById('final-review-list');
+    if (!reviewContainer) return;
+
+    reviewContainer.innerHTML = '';
+
+    state.answerHistory.forEach((item, index) => {
+        const card = document.createElement('article');
+        card.className = `review-card ${item.isCorrect ? 'review-correct' : 'review-wrong'}`;
+        card.innerHTML = `
+            <h3>${index + 1}. ${item.question}</h3>
+            <p><strong>SUA RESPOSTA:</strong> ${item.selectedAnswer}</p>
+            <p><strong>RESPOSTA CERTA:</strong> ${item.correctAnswer}</p>
+            <p><strong>CURIOSIDADE:</strong> ${item.curiosity}</p>
+        `;
+        reviewContainer.appendChild(card);
+    });
 }
 
 document.getElementById('btn-play-again').addEventListener('click', () => {
@@ -377,6 +423,12 @@ document.getElementById('btn-play-again').addEventListener('click', () => {
 
 document.getElementById('btn-share').addEventListener('click', () => {
     alert(`Consegui ${state.score} pontos no jogo Descobrindo Brusque!`);
+});
+
+document.getElementById('btn-toggle-review').addEventListener('click', (e) => {
+    const panel = document.getElementById('final-review-panel');
+    const isHidden = panel.classList.toggle('hidden');
+    e.currentTarget.innerText = isHidden ? 'VER REVISÃO DAS PERGUNTAS' : 'OCULTAR REVISÃO';
 });
 
 btnBackToMap.addEventListener('click', () => {
