@@ -94,10 +94,13 @@ function showScreen(screenId) {
     });
     screens[screenId].classList.remove('hidden');
     screens[screenId].classList.add('active');
-    
-    // Restaura o fundo padrão fora do jogo
+
     if (screenId !== 'game') {
         document.body.style.backgroundImage = "url('src/assets/images/background.png')";
+    }
+
+    if (screenId === 'difficulty' && !state.soundMuted) {
+        playAudioFile('src/assets/audio/difficulty.mp3');
     }
 }
 
@@ -168,6 +171,7 @@ function startGame(level) {
         nameplate.classList.add('hidden');
     }
     
+    screenHistory.push('difficulty');
     showScreen('game');
     loadQuestion();
 }
@@ -496,6 +500,13 @@ window.onload = async () => {
             }
         } catch (e) {}
     }
+
+    // Overlay de desbloqueio de áudio — garante interação antes de qualquer som
+    const overlay = document.getElementById('audio-unlock-overlay');
+    overlay.querySelector('.btn-start-big').addEventListener('click', () => {
+        overlay.classList.add('hidden');
+        if (!state.soundMuted) playAudioFile('src/assets/audio/welcome.mp3');
+    }, { once: true });
 };
 
 document.getElementById('btn-change-player').addEventListener('click', (e) => {
